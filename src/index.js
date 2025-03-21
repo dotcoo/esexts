@@ -427,7 +427,7 @@ Object.defineProperties(String.prototype, {
   },
 });
 
-Object.defineProperties(Iterator.prototype, {
+typeof Iterator != 'undefined' && Object.defineProperties(Iterator.prototype, {
   toArray: {
     value: function() {
       return Array.from(this);
