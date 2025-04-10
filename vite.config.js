@@ -4,8 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: './src/index.js',
-      formats: ['es', 'umd'],
+      entry: 'lib/index.js',
       name: 'esexts',
     },
   },
