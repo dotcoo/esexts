@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -17,8 +17,7 @@
   ],
   "type": "module",
   "main": "dist/esexts.umd.cjs",
-  "import": "dist/esexts.js",
-  "require": "dist/esexts.umd.cjs",
+  "module": "dist/esexts.js",
   "exports": {
     "import": "dist/esexts.js",
     "require": "dist/esexts.umd.cjs"
