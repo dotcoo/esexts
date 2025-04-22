@@ -2,7 +2,7 @@
 
 'use strict';
 
-typeof window !== 'undefined' || require('../lib');
+typeof window === 'undefined' && require('../lib');
 
 const list1 = [
   { tid: 1, id: 1, pid: 0, name: '1' },
@@ -143,6 +143,8 @@ const tree1 = [
   ] },
 ];
 
+// === Tree Object ===
+
 console.log(list1.clone0().toTree());
 console.log(list2.clone0().toTree());
 console.log(tree1.clone0().tree2tree());
@@ -163,8 +165,16 @@ n1.getChildrens0(true, 2).each0(v => console.log('  '.repeat(v.level) + v.id));
 t1.treeEach0(v => console.log('  '.repeat(v.level) + v.id));
 t1.treeEach0(v => console.log('  '.repeat(v.level) + v.id), false, 2);
 
-t1.treeMap0(({ id, name }) => ({ id, name })).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
-t1.treeMap0(({ id, name }) => ({ id, name }), false, 2).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
+t1.treeMap0(({ id, name, level }) => ({ id, name, level })).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
+t1.treeMap0(({ id, name, level }) => ({ id, name, level }), false, 2).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
+
+// === Tree Array ===
+
+console.log('Array.treeFind0', list1.clone0().toTree().children.treeFind0(v => v.id == 5));
+console.log('Array.treeEach0', list1.clone0().toTree().children.treeEach0(v => v.name += '-each'));
+console.log('Array.treeMap0', list1.clone0().toTree().children.treeMap0(({ id, name, level }) => ({ id, name: name + '-map', level })));
+
+// === Array.toMerge ===
 
 const l = [
   { id: 1, name: '1', cid: 1, cname: 'a' },
