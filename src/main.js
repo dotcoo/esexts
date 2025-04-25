@@ -174,6 +174,13 @@ console.log('Array.treeFind0', list1.clone0().toTree().children.treeFind0(v => v
 console.log('Array.treeEach0', list1.clone0().toTree().children.treeEach0(v => v.name += '-each'));
 console.log('Array.treeMap0', list1.clone0().toTree().children.treeMap0(({ id, name, level }) => ({ id, name: name + '-map', level })));
 
+// === Tree Methods ===
+
+const t2 = list1.clone0().toTree();
+
+console.log('Object.getChildrens0', t2.getChildrens0(true));
+console.log('Object.getChildrens0', t2.getChildrens0(true, 1));
+
 // === Array.toMerge ===
 
 const l = [
@@ -184,4 +191,4 @@ const l = [
   { id: 5, name: '5', cid: 2, cname: 'b' },
   { id: 6, name: '6', cid: 2, cname: 'b' },
 ];
-console.log(l.toMerge(v => v.cid));
+console.log('Array.toMerge', l.toMerge(v => v.cid));
