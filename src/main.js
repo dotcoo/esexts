@@ -57,7 +57,7 @@ const list2 = [
       { id: 16, pid: 5, name: '1-5-16' },
       { id: 17, pid: 5, name: '1-5-17' },
       { id: 18, pid: 5, name: '1-5-18' },
-    { id: 6, pid: 2, name: '1-6' },
+    { id: 6, pid: 1, name: '1-6' },
       { id: 19, pid: 6, name: '1-6-19' },
       { id: 20, pid: 6, name: '1-6-20' },
       { id: 21, pid: 6, name: '1-6-21' },
@@ -146,7 +146,7 @@ const tree1 = [
 // === Tree Object ===
 
 console.log(list1.clone0().toTree());
-console.log(list2.clone0().toTree());
+console.log(list2.clone0().toTree({ hasRoot: false }));
 console.log(tree1.clone0().tree2tree());
 
 const t1 = list1.clone0().toTree();
