@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -19,9 +19,9 @@
   "main": "dist/esexts.umd.cjs",
   "module": "dist/esexts.js",
   "exports": {
-      "import": "dist/esexts.js",
-      "require": "dist/esexts.umd.cjs"
-    },
+    "require": "dist/esexts.umd.cjs",
+    "import": "dist/esexts.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
