@@ -93,7 +93,11 @@ console.assert(JSON.stringify([{ id: 1, name: 'name1' }, { id: 2, name: 'name2' 
 
 // Array.prototype.toObject
 
-console.assert(JSON.stringify([{ id: 1, name: 'name1' }, { id: 2, name: 'name2' }, { id: 3, name: 'name3' }].toObject(v => [v.id, v])) === '{"1":{"id":1,"name":"name1"},"2":{"id":2,"name":"name2"},"3":{"id":3,"name":"name3"}}', 'error');
+console.assert(JSON.stringify([{ id: 1, name: 'name1' }, { id: 2, name: 'name2' }, { id: 3, name: 'name3' }].reduce((a, c) => a.attr0(c.id, c), {})) === '{"1":{"id":1,"name":"name1"},"2":{"id":2,"name":"name2"},"3":{"id":3,"name":"name3"}}', 'error');
+
+// Array.prototype.toGroup
+
+console.assert(JSON.stringify([{ id: 1, name: 'name1', gender: 'man' }, { id: 2, name: 'name2', gender: 'woman' }, { id: 3, name: 'name3', gender: 'man' }].reduce((a, c) => (a.attr0(c.gender, [], false).attr0(c.gender).push(c), a), {})) === '{"man":[{"id":1,"name":"name1","gender":"man"},{"id":3,"name":"name3","gender":"man"}],"woman":[{"id":2,"name":"name2","gender":"woman"}]}', 'error');
 
 // Array.prototype.toMap
 
@@ -102,11 +106,3 @@ console.assert(JSON.stringify([{ id: 1, name: 'name1' }, { id: 2, name: 'name2' 
 // Array.prototype.toSet
 
 console.assert(JSON.stringify([...[{ id: 1, name: 'name1' }, { id: 2, name: 'name2' }, { id: 3, name: 'name3' }].toSet(v => v.id).values()]) === '[1,2,3]', 'error');
-
-// Array.prototype.toGroup
-
-console.assert(JSON.stringify([{ id: 1, name: 'name1', gender: 'man' }, { id: 2, name: 'name2', gender: 'woman' }, { id: 3, name: 'name3', gender: 'man' }].toGroup(v => [v.gender, v])) === '{"man":[{"id":1,"name":"name1","gender":"man"},{"id":3,"name":"name3","gender":"man"}],"woman":[{"id":2,"name":"name2","gender":"woman"}]}', 'error');
-
-// Array.prototype.toMerge
-
-console.assert(JSON.stringify([{ id: 1, name: 'name1', gender: 'man' }, { id: 2, name: 'name2', gender: 'woman' }, { id: 3, name: 'name3', gender: 'man' }].toMerge(v => v.gender)) === '[{"id":1,"name":"name1","gender":"man","children":[{"id":1,"name":"name1","gender":"man"},{"id":3,"name":"name3","gender":"man"}]},{"id":2,"name":"name2","gender":"woman","children":[{"id":2,"name":"name2","gender":"woman"}]}]', 'error');
