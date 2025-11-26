@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -28,6 +28,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.1.5"
+    "vite": "^7.2.4"
   }
 }
