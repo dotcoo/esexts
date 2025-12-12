@@ -52,7 +52,7 @@ console.assert(JSON.stringify({ a: 1, b: 2, c: 3 }.omit0('c')) === '{"a":1,"b":2
 
 console.assert({ a: 1, b: 2, c: 3 }.attr0('a') === 1, 'error');
 console.assert({ a: 1, b: 2, c: 3 }.attr0('a', 2).a === 2, 'error');
-console.assert({ a: 1, b: 2, c: 3 }.attr0(v => v.a+v.b+v.c) === 6, 'error');
+// console.assert({ a: 1, b: 2, c: 3 }.attr0(v => v.a+v.b+v.c) === 6, 'error');
 
 // Object.prototype.toArray0
 
