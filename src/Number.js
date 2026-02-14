@@ -45,11 +45,11 @@ console.assert(number2.round() === 2, 'error');
 console.assert(number2.round(1) === 1.7, 'error');
 console.assert(number2.round(2) === 1.68, 'error');
 
-// Number.prototype.toFixed0
+// Number.prototype.fixed
 
-console.assert(number1.toFixed0() === 1, 'error');
-console.assert(number1.toFixed0(1) === 1.5, 'error');
-console.assert(number1.toFixed0(2) === 1.46, 'error');
+console.assert(number1.fixed() === 1, 'error');
+console.assert(number1.fixed(1) === 1.5, 'error');
+console.assert(number1.fixed(2) === 1.46, 'error');
 
 // Number.prototype.toDate
 

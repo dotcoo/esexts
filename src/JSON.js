@@ -6,4 +6,4 @@
 
 // JSON.parse0
 
-console.assert(JSON.parse0('', 0) === 0, 'error');
+console.assert(JSON.parse$('', 0) === 0, 'error');

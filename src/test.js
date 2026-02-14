@@ -2,43 +2,57 @@
 
 'use strict';
 
-// ====== Convert ======
+// ====== TextEncoder ======
 
-// String.prototype.string2bytes
+// TextEncoder.prototype.encode
+console.assert(JSON.stringify(new TextEncoder().encode('abcdefg').toArray()) === '[97,98,99,100,101,102,103]', 'error');
+console.assert(JSON.stringify(new TextEncoder().encode('𠮷𠮾').toArray()) === '[240,160,174,183,240,160,174,190]', 'error');
 
-console.assert(JSON.stringify('abcdefg'.string2bytes().toArray()) === '[97,98,99,100,101,102,103]', 'error');
+// ====== TextDecoder ======
 
-// Array.prototype.bytes2string
+// TextDecoder.prototype.decode
+console.assert(new TextDecoder().decode(new Uint8Array([97,98,99,100,101,102,103])) === 'abcdefg', 'error');
+console.assert(new TextDecoder().decode(new Uint8Array([240,160,174,183,240,160,174,190])) === '𠮷𠮾', 'error');
 
-console.assert([97,98,99,100,101,102,103].bytes2string() === 'abcdefg', 'error');
+// ====== Uint8Array ======
 
-// Array.prototype.base64encode
+// Uint8Array.prototype.fromString
+console.assert(JSON.stringify(Uint8Array.fromString('abcdefg').toArray()) === '[97,98,99,100,101,102,103]', 'error');
 
-console.assert([97,98,99,100,101,102,103].base64encode() === 'YWJjZGVmZw==', 'error');
+// Uint8Array.prototype.toString
+console.assert(new Uint8Array([97,98,99,100,101,102,103]).toString() === 'abcdefg', 'error');
 
-// String.prototype.base64decode
+// Uint8Array.prototype.fromHex
+console.assert(JSON.stringify(Uint8Array.fromHex('61626364656667').toArray()) === '[97,98,99,100,101,102,103]', 'error');
 
-console.assert(JSON.stringify('YWJjZGVmZw=='.base64decode().toArray()) === '[97,98,99,100,101,102,103]', 'error');
+// Uint8Array.prototype.toHex
+console.assert(new Uint8Array([97,98,99,100,101,102,103]).toHex() === '61626364656667', 'error');
 
-// Array.prototype.bytes2hex
+// Uint8Array.prototype.fromBase64
+console.assert(JSON.stringify(Uint8Array.fromBase64('YWJjZGVmZw==').toArray()) === '[97,98,99,100,101,102,103]', 'error');
 
-console.assert([10,11,12,253,254,255].bytes2hex() === '0a0b0cfdfeff', 'error');
+// Uint8Array.prototype.toBase64
+console.assert(new Uint8Array([97,98,99,100,101,102,103]).toBase64() === 'YWJjZGVmZw==', 'error');
 
-// String.prototype.hex2bytes
+// ====== hex ======
 
-console.assert(JSON.stringify('0a0b0cfdfeff'.hex2bytes().toArray()) === '[10,11,12,253,254,255]', 'error');
+// String.prototype.hexencode
 
-// Array.prototype.toUint8Array
+console.assert('abcdefg'.hexencode() === '61626364656667', 'error');
 
-// Array.prototypeBuffer.toUint8Array
+// Array.prototype.hexdecode
 
-// Uint8Array.prototype.bytes2hex
+console.assert('61626364656667'.hexdecode() === 'abcdefg', 'error');
 
-// Uint8Array.prototype.bytes2string
+// ====== base64 ======
 
-// Uint8Array.prototype.base64encode
+// String.prototype.base64encode
 
-// Uint8Array.prototype.toArray
+console.assert('abcdefg'.base64encode() === 'YWJjZGVmZw==', 'error');
+
+// Array.prototype.base64decode
+
+console.assert('YWJjZGVmZw=='.base64decode() === 'abcdefg', 'error');
 
 // ====== Tree ======
 
@@ -205,38 +219,38 @@ const tree1 = [
 
 // Array.prototype.treeMap0
 
-console.log(list1.clone0().toTree());
-console.log(list2.clone0().toTree({ hasRoot: false }));
-console.log(tree1.clone0().tree2tree());
+console.log(list1.clone$().toTree());
+console.log(list2.clone$().toTree({ hasRoot: false }));
+console.log(tree1.clone$().tree2tree());
 
-const t1 = list1.clone0().toTree();
+const t1 = list1.clone$().toTree();
 
-const n30 = t1.treeFind0(v => v.id == 30);
-console.log(n30.getParents0());
-console.log(n30.getParents0(true));
-console.log(n30.getParents0(true, 2));
+const n30 = t1.tree$find(v => v.id == 30);
+console.log(n30.getParents$());
+console.log(n30.getParents$(true));
+console.log(n30.getParents$(true, 2));
 
-const n1 = t1.treeFind0(v => v.id == 1);
-n1.getChildrens0(false).each0(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens0(true).each0(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens0(false, 2).each0(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens0(true, 2).each0(v => console.log('  '.repeat(v.level) + v.id));
+const n1 = t1.tree$find(v => v.id == 1);
+n1.getChildrens$(false).each$(v => console.log('  '.repeat(v.level) + v.id));
+n1.getChildrens$(true).each$(v => console.log('  '.repeat(v.level) + v.id));
+n1.getChildrens$(false, 2).each$(v => console.log('  '.repeat(v.level) + v.id));
+n1.getChildrens$(true, 2).each$(v => console.log('  '.repeat(v.level) + v.id));
 
-t1.treeEach0(v => console.log('  '.repeat(v.level) + v.id));
-t1.treeEach0(v => console.log('  '.repeat(v.level) + v.id), false, 2);
+t1.tree$each(v => console.log('  '.repeat(v.level) + v.id));
+t1.tree$each(v => console.log('  '.repeat(v.level) + v.id), false, 2);
 
-t1.treeMap0(({ id, name, level }) => ({ id, name, level })).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
-t1.treeMap0(({ id, name, level }) => ({ id, name, level }), false, 2).treeEach0(v => console.log('  '.repeat(v.level) + v.id));
+t1.tree$map(({ id, name, level }) => ({ id, name, level })).tree$each(v => console.log('  '.repeat(v.level) + v.id));
+t1.tree$map(({ id, name, level }) => ({ id, name, level }), false, 2).tree$each(v => console.log('  '.repeat(v.level) + v.id));
 
 // === Tree Array ===
 
-console.log('Array.treeFind0', list1.clone0().toTree().children.treeFind0(v => v.id == 5));
-console.log('Array.treeEach0', list1.clone0().toTree().children.treeEach0(v => v.name += '-each'));
-console.log('Array.treeMap0', list1.clone0().toTree().children.treeMap0(({ id, name, level }) => ({ id, name: name + '-map', level })));
+console.log('Array.treeFind0', list1.clone$().toTree().children.tree$find(v => v.id == 5));
+console.log('Array.treeEach0', list1.clone$().toTree().children.tree$each(v => v.name += '-each'));
+console.log('Array.treeMap0', list1.clone$().toTree().children.tree$map(({ id, name, level }) => ({ id, name: name + '-map', level })));
 
 // === Tree Methods ===
 
-const t2 = list1.clone0().toTree();
+const t2 = list1.clone$().toTree();
 
-console.log('Object.getChildrens0', t2.getChildrens0(true));
-console.log('Object.getChildrens0', t2.getChildrens0(true, 1));
+console.log('Object.getChildrens0', t2.getChildrens$(true));
+console.log('Object.getChildrens0', t2.getChildrens$(true, 1));

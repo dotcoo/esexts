@@ -10,43 +10,43 @@ const string1 = 'hello world';
 const string2 = 'hello,world';
 const string3 = 'hello,world,hello,world';
 
-// String.prototype.length0
+// String.prototype.length$
 
-console.assert('hello world'.length0() === 11, 'error');
+console.assert('hello world'.length$() === 11, 'error');
 
-// String.prototype.substring0
+// String.prototype.substring$
 
-console.assert(string1.substring0() === 'hello world', 'error');
-console.assert(string1.substring0(2) === 'llo world', 'error');
-console.assert(string1.substring0(2, 8) === 'llo wo', 'error');
-console.assert(string1.substring0(2, -3) === 'llo wo', 'error');
-console.assert(string1.substring0(-9, 8) === 'llo wo', 'error');
-console.assert(string1.substring0(-9, -3) === 'llo wo', 'error');
+console.assert(string1.substring$() === 'hello world', 'error');
+console.assert(string1.substring$(2) === 'llo world', 'error');
+console.assert(string1.substring$(2, 8) === 'llo wo', 'error');
+console.assert(string1.substring$(2, -3) === 'llo wo', 'error');
+console.assert(string1.substring$(-9, 8) === 'llo wo', 'error');
+console.assert(string1.substring$(-9, -3) === 'llo wo', 'error');
 
-// String.prototype.substr0
+// String.prototype.substr$
 
-console.assert(string1.substr0() === 'hello world', 'error');
-console.assert(string1.substr0(2) === 'llo world', 'error');
-console.assert(string1.substr0(2, 6) === 'llo wo', 'error');
-console.assert(string1.substr0(-9, 6) === 'llo wo', 'error');
+console.assert(string1.substr$() === 'hello world', 'error');
+console.assert(string1.substr$(2) === 'llo world', 'error');
+console.assert(string1.substr$(2, 6) === 'llo wo', 'error');
+console.assert(string1.substr$(-9, 6) === 'llo wo', 'error');
 
-// String.prototype.split0
+// String.prototype.split$
 
-console.assert(JSON.stringify(string3.split0()) === '["hello","world","hello","world"]', 'error');
-console.assert(JSON.stringify(string3.split0(',')) === '["hello","world","hello","world"]', 'error');
-console.assert(JSON.stringify(string3.split0(',', 1)) === '["hello,world,hello,world"]', 'error');
-console.assert(JSON.stringify(string3.split0(',', 2)) === '["hello","world,hello,world"]', 'error');
-console.assert(JSON.stringify(string3.split0(',', 3)) === '["hello","world","hello,world"]', 'error');
+console.assert(JSON.stringify(string3.split$()) === '["hello","world","hello","world"]', 'error');
+console.assert(JSON.stringify(string3.split$(',')) === '["hello","world","hello","world"]', 'error');
+console.assert(JSON.stringify(string3.split$(',', 1)) === '["hello,world,hello,world"]', 'error');
+console.assert(JSON.stringify(string3.split$(',', 2)) === '["hello","world,hello,world"]', 'error');
+console.assert(JSON.stringify(string3.split$(',', 3)) === '["hello","world","hello,world"]', 'error');
 
-// String.prototype.splitNumber
+// String.prototype.split$number
 
-console.assert(JSON.stringify('1,2,3,4,5'.splitNumber()) === '[1,2,3,4,5]', 'error');
-console.assert(JSON.stringify('1 2 3 4 5'.splitNumber(' ')) === '[1,2,3,4,5]', 'error');
+console.assert(JSON.stringify('1,2,3,4,5'.split$number()) === '[1,2,3,4,5]', 'error');
+console.assert(JSON.stringify('1 2 3 4 5'.split$number(' ')) === '[1,2,3,4,5]', 'error');
 
-// String.prototype.splitSegment
+// String.prototype.split$segment
 
-console.assert(JSON.stringify(string1.splitSegment()) === '["h","e","l","l","o"," ","w","o","r","l","d"]', 'error');
-console.assert(JSON.stringify(string1.splitSegment(3)) === '["hel","lo ","wor","ld"]', 'error');
+console.assert(JSON.stringify(string1.split$segment()) === '["h","e","l","l","o"," ","w","o","r","l","d"]', 'error');
+console.assert(JSON.stringify(string1.split$segment(3)) === '["hel","lo ","wor","ld"]', 'error');
 
 // String.prototype.sprintf
 
@@ -97,9 +97,9 @@ console.assert('11'.baseConvert(64) === 65, 'error');
 
 // String.prototype.toFixed0
 
-console.assert('11.11'.toFixed0() === 11, 'error');
-console.assert('11.11'.toFixed0(1) === 11.1, 'error');
-console.assert('11.11'.toFixed0(2) === 11.11, 'error');
+console.assert('11.11'.fixed() === 11, 'error');
+console.assert('11.11'.fixed(1) === 11.1, 'error');
+console.assert('11.11'.fixed(2) === 11.11, 'error');
 
 // String.prototype.toDate
 

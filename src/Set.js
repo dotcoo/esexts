@@ -12,29 +12,29 @@ console.assert(JSON.stringify([...set1.values()]) === '[1,2,3]', 'error');
 
 // ====== Set.prototype ======
 
-// Set.prototype.lengnth0
+// Set.prototype.lengnth$
 
-console.assert(set1.length0() === 3, 'error');
+console.assert(set1.length$() === 3, 'error');
 
-// Set.prototype.entries0
+// Set.prototype.entries$
 
-console.assert(JSON.stringify(set1.entries0()) === '[[1,1],[2,2],[3,3]]', 'error');
+console.assert(JSON.stringify(set1.entries$()) === '[[1,1],[2,2],[3,3]]', 'error');
 
-// Set.prototype.keys0
+// Set.prototype.keys$
 
-console.assert(JSON.stringify(set1.keys0()) === '[1,2,3]', 'error');
+console.assert(JSON.stringify(set1.keys$()) === '[1,2,3]', 'error');
 
-// Set.prototype.values0
+// Set.prototype.values$
 
-console.assert(JSON.stringify(set1.values0()) === '[1,2,3]', 'error');
+console.assert(JSON.stringify(set1.values$()) === '[1,2,3]', 'error');
 
-// Set.prototype.add0
+// Set.prototype.add$
 
-console.assert(JSON.stringify([...set1.add0(4).values()]) === '[1,2,3,4]', 'error');
+console.assert(JSON.stringify([...set1.add$t(4).values()]) === '[1,2,3,4]', 'error');
 
-// Set.prototype.delete0
+// Set.prototype.delete$
 
-console.assert(JSON.stringify([...set1.delete0(4).values()]) === '[1,2,3]', 'error');
+console.assert(JSON.stringify([...set1.delete$t(4).values()]) === '[1,2,3]', 'error');
 
 // Set.prototype.toArray
 
