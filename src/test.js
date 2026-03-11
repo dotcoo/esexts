@@ -219,38 +219,38 @@ const tree1 = [
 
 // Array.prototype.treeMap0
 
-console.log(list1.clone$().toTree());
-console.log(list2.clone$().toTree({ hasRoot: false }));
-console.log(tree1.clone$().tree2tree());
+console.log(list1.$clone().toTree());
+console.log(list2.$clone().toTree({ hasRoot: false }));
+console.log(tree1.$clone().$tree2tree());
 
-const t1 = list1.clone$().toTree();
+const t1 = list1.$clone().toTree();
 
-const n30 = t1.tree$find(v => v.id == 30);
-console.log(n30.getParents$());
-console.log(n30.getParents$(true));
-console.log(n30.getParents$(true, 2));
+const n30 = t1.$tree$find(v => v.id == 30);
+console.log(n30.$getParents());
+console.log(n30.$getParents(true));
+console.log(n30.$getParents(true, 2));
 
-const n1 = t1.tree$find(v => v.id == 1);
-n1.getChildrens$(false).each$(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens$(true).each$(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens$(false, 2).each$(v => console.log('  '.repeat(v.level) + v.id));
-n1.getChildrens$(true, 2).each$(v => console.log('  '.repeat(v.level) + v.id));
+const n1 = t1.$tree$find(v => v.id == 1);
+n1.$getChildrens(false).each(v => console.log('  '.repeat(v.level) + v.id));
+n1.$getChildrens(true).each(v => console.log('  '.repeat(v.level) + v.id));
+n1.$getChildrens(false, 2).each(v => console.log('  '.repeat(v.level) + v.id));
+n1.$getChildrens(true, 2).each(v => console.log('  '.repeat(v.level) + v.id));
 
-t1.tree$each(v => console.log('  '.repeat(v.level) + v.id));
-t1.tree$each(v => console.log('  '.repeat(v.level) + v.id), false, 2);
+t1.$tree$each(v => console.log('  '.repeat(v.level) + v.id));
+t1.$tree$each(v => console.log('  '.repeat(v.level) + v.id), false, 2);
 
-t1.tree$map(({ id, name, level }) => ({ id, name, level })).tree$each(v => console.log('  '.repeat(v.level) + v.id));
-t1.tree$map(({ id, name, level }) => ({ id, name, level }), false, 2).tree$each(v => console.log('  '.repeat(v.level) + v.id));
+t1.$tree$map(({ id, name, level }) => ({ id, name, level })).$tree$each(v => console.log('  '.repeat(v.level) + v.id));
+t1.$tree$map(({ id, name, level }) => ({ id, name, level }), false, 2).$tree$each(v => console.log('  '.repeat(v.level) + v.id));
 
 // === Tree Array ===
 
-console.log('Array.treeFind0', list1.clone$().toTree().children.tree$find(v => v.id == 5));
-console.log('Array.treeEach0', list1.clone$().toTree().children.tree$each(v => v.name += '-each'));
-console.log('Array.treeMap0', list1.clone$().toTree().children.tree$map(({ id, name, level }) => ({ id, name: name + '-map', level })));
+console.log('Array.treeFind0', list1.$clone().toTree().children.$tree$find(v => v.id == 5));
+console.log('Array.treeEach0', list1.$clone().toTree().children.$tree$each(v => v.name += '-each'));
+console.log('Array.treeMap0', list1.$clone().toTree().children.$tree$map(({ id, name, level }) => ({ id, name: name + '-map', level })));
 
 // === Tree Methods ===
 
-const t2 = list1.clone$().toTree();
+const t2 = list1.$clone().toTree();
 
-console.log('Object.getChildrens0', t2.getChildrens$(true));
-console.log('Object.getChildrens0', t2.getChildrens$(true, 1));
+console.log('Object.getChildrens0', t2.$getChildrens(true));
+console.log('Object.getChildrens0', t2.$getChildrens(true, 1));

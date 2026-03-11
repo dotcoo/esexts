@@ -19,4 +19,5 @@ import './Iterator';
 import './ArrayBuffer';
 import './Uint8Array';
 import './Math';
+import './LRU';
 import './test';

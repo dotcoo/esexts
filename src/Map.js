@@ -12,53 +12,53 @@ console.assert(JSON.stringify([...map1.values()]) === '["one","two","three"]', '
 
 // ====== Map.prototype ======
 
-// Map.prototype.lengnth$
+// Map.prototype.$lengnth
 
-console.assert(map1.length$() === 3, 'error');
+console.assert(map1.$length() === 3, 'error');
 
-// Map.prototype.entries$
+// Map.prototype.$entries
 
-console.assert(JSON.stringify(map1.entries$()) === '[[1,"one"],[2,"two"],[3,"three"]]', 'error');
+console.assert(JSON.stringify(map1.$entries()) === '[[1,"one"],[2,"two"],[3,"three"]]', 'error');
 
-// Map.prototype.keys$
+// Map.prototype.$keys
 
-console.assert(JSON.stringify(map1.keys$()) === '[1,2,3]', 'error');
+console.assert(JSON.stringify(map1.$keys()) === '[1,2,3]', 'error');
 
-// Map.prototype.values$
+// Map.prototype.$values
 
-console.assert(JSON.stringify(map1.values$()) === '["one","two","three"]', 'error');
+console.assert(JSON.stringify(map1.$values()) === '["one","two","three"]', 'error');
 
-// Map.prototype.set$
+// Map.prototype.$set
 
-console.assert(JSON.stringify([...map1.set$t(4, 'four').values()]) === '["one","two","three","four"]', 'error');
+console.assert(JSON.stringify([...map1.$set(4, 'four').values()]) === '["one","two","three","four"]', 'error');
 
-// Map.prototype.delete$
+// Map.prototype.$delete
 
-console.assert(JSON.stringify([...map1.delete$t(4).values()]) === '["one","two","three"]', 'error');
+console.assert(JSON.stringify([...map1.$delete(4).values()]) === '["one","two","three"]', 'error');
 
-// Map.prototype.getOrInsert$
+// Map.prototype.$getOrInsert
 
-console.assert(map1.getOrInsert$(1) === 'one', 'error');
-console.assert(map1.getOrInsert$(4) === null, 'error');
-console.assert(map1.getOrInsert$(5, 0) === 0, 'error');
+console.assert(map1.$getOrInsert(1) === 'one', 'error');
+console.assert(map1.$getOrInsert(4) === null, 'error');
+console.assert(map1.$getOrInsert(5, 0) === 0, 'error');
 
-// Map.prototype.getOrInsertComputed$
+// Map.prototype.$getOrInsertComputed
 
-console.assert(map1.getOrInsertComputed$(1, key => key * key) === 'one', 'error');
-console.assert(map1.getOrInsertComputed$(6, key => key * key) === 36, 'error');
-console.assert(map1.getOrInsertComputed$(7, key => key * key) === 49, 'error');
+console.assert(map1.$getOrInsertComputed(1, key => key * key) === 'one', 'error');
+console.assert(map1.$getOrInsertComputed(6, key => key * key) === 36, 'error');
+console.assert(map1.$getOrInsertComputed(7, key => key * key) === 49, 'error');
 
-// Map.prototype.get$
+// Map.prototype.$get
 
-console.assert(map2.get$(1, null) === 'one', 'error');
-console.assert(map2.get$(2, 4) === 4, 'error');
-console.assert(map2.get$(3, key => key * key) === 9, 'error');
+console.assert(map2.$get(1, null) === 'one', 'error');
+console.assert(map2.$get(2, 4) === 4, 'error');
+console.assert(map2.$get(3, key => key * key) === 9, 'error');
 
-// Map.prototype.get$async
+// Map.prototype.$get$async
 
-console.assert((await map2.get$async(1, null)) === 'one', 'error');
-console.assert((await map2.get$async(4, 16)) === 16, 'error');
-console.assert((await map2.get$async(5, key => new Promise(r => setTimeout(() => r(key * key), 10)))) === 25, 'error');
+console.assert((await map2.$get$async(1, null)) === 'one', 'error');
+console.assert((await map2.$get$async(4, 16)) === 16, 'error');
+console.assert((await map2.$get$async(5, key => new Promise(r => setTimeout(() => r(key * key), 10)))) === 25, 'error');
 
 // Map.prototype.toObject
 
