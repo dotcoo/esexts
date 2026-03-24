@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "2.0.6",
+  "version": "2.1.0",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -13,12 +13,15 @@
     "esexts"
   ],
   "files": [
-    "dist"
+    "dist",
+    "types.d.ts"
   ],
   "type": "module",
+  "types": "./types.d.ts",
   "main": "./dist/esexts.umd.cjs",
   "module": "./dist/esexts.js",
   "exports": {
+    "types": "./types.d.ts",
     "require": "./dist/esexts.umd.cjs",
     "import": "./dist/esexts.js"
   },
