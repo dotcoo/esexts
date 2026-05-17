@@ -149,7 +149,7 @@ declare global {
      * @param defval 默认值
      * @returns 属性值
      */
-    $attr(key: string, defval: any, { defval: any }): any;
+    $attr(key: string, defval: any, options: { defval: any }): any;
     
     /**
      * 设置对象的属性（带存在性检查）
@@ -158,7 +158,7 @@ declare global {
      * @param exists 是否检查属性是否存在
      * @returns 当前对象
      */
-    $attr(key: string, val: any, { exists: boolean }): this;
+    $attr(key: string, val: any, options: { exists: boolean }): this;
 
     /**
      * 设置对象的属性（带存在性检查）
@@ -167,7 +167,7 @@ declare global {
      * @param define 属性定义
      * @returns 当前对象
      */
-    $attr(key: string, val: any, { define: any }): this;
+    $attr(key: string, val: any, options: { define: any }): this;
 
     /**
      * 属性四则运算（带定义选项）
@@ -180,7 +180,7 @@ declare global {
      * @param div 除法值
      * @returns 当前对象
      */
-    $attr(key: string, val: any, { defval: any, add: number, sub: number, mul: number, div: number }): this;
+    $attr(key: string, val: any, options: { defval: any, add: number, sub: number, mul: number, div: number }): this;
     
     /**
      * 通过管道函数处理对象

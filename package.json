@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -13,6 +13,8 @@
     "esexts"
   ],
   "files": [
+    "LICENSE",
+    "README.md",
     "dist",
     "types.d.ts"
   ],
