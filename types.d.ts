@@ -1,3 +1,5 @@
+// Copyright 2021 The dotcoo <dotcoo@163.com>. All rights reserved.
+
 /**
  * ES 扩展类型定义
  * 为 JavaScript 内置对象添加扩展方法
@@ -10,7 +12,7 @@ declare global {
     /**
      * 创建一个新的 Object 实例
      */
-    new(): Object;
+    new(): Record<string, any>;
     
     /**
      * 检查一个值是否为对象
@@ -24,14 +26,14 @@ declare global {
      * @param args 要合并的对象列表
      * @returns 合并后的新对象
      */
-    merge(...args: Object[]): Object;
+    merge(...args: Record<string, any>[]): Record<string, any>;
     
     /**
      * 连接多个对象
      * @param args 要连接的对象列表, 数组会合并, 而不是覆盖
      * @returns 连接后的新对象
      */
-    concat(...args: Object[]): Object;
+    concat(...args: Record<string, any>[]): Record<string, any>;
   }
 
   /**
@@ -42,7 +44,7 @@ declare global {
      * 克隆对象
      * @returns 克隆后的新对象
      */
-    $clone(): Object;
+    $clone(): Record<string, any>;
     
     /**
      * 获取对象的长度（属性数量）
@@ -54,26 +56,26 @@ declare global {
      * 获取对象的键值对迭代器
      * @returns 键值对迭代器
      */
-    $entries(): IterableIterator<[string, any]>;
+    $entries(): [string, any][];
     
     /**
      * 获取对象的键迭代器
      * @returns 键迭代器
      */
-    $keys(): IterableIterator<string>;
+    $keys(): string[];
     
     /**
      * 获取对象的值迭代器
      * @returns 值迭代器
      */
-    $values(): IterableIterator<any>;
+    $values(): any[];
     
     /**
      * 分配属性到对象
      * @param args 要分配的属性源
      * @returns 分配后的对象
      */
-    $assign(...args: any[]): Object;
+    $assign(...sources: any[]): Record<string, any>;
     
     /**
      * 将值转换为 JSON 字符串
@@ -82,21 +84,21 @@ declare global {
      * @param space 缩进空格
      * @returns JSON 字符串
      */
-    $stringify(v: any, replacer?: any, space?: string): string;
+    $stringify(replacer?: any, space?: string | number): string;
     
     /**
      * 合并多个对象到当前对象
      * @param args 要合并的对象列表
      * @returns 合并后的对象
      */
-    $merge(...args: Object[]): Object;
+    $merge(...args: Record<string, any>[]): Record<string, any>;
     
     /**
      * 连接多个对象到当前对象
      * @param args 要连接的对象列表, 数组会合并, 而不是覆盖
      * @returns 连接后的对象
      */
-    $concat(...args: Object[]): Object;
+    $concat(...args: Record<string, any>[]): Record<string, any>;
     
     /**
      * 检查对象是否为空
@@ -116,14 +118,14 @@ declare global {
      * @param keys 要选取的键列表
      * @returns 包含指定键属性的新对象
      */
-    $pick(...keys: string[]): Object;
+    $pick(...keys: string[]): Record<string, any>;
     
     /**
      * 从对象中排除指定键的属性
      * @param keys 要排除的键列表
      * @returns 排除指定键属性的新对象
      */
-    $omit(...keys: string[]): Object;
+    $omit(...keys: string[]): Record<string, any>;
     
     /**
      * 获取对象的属性
@@ -136,38 +138,49 @@ declare global {
      * 设置对象的属性
      * @param key 属性键
      * @param val 属性值
-     * @returns 设置后的值
+     * @returns 当前对象
      */
-    $attr(key: string, val: any ): any;
+    $attr(key: string, val: any): this;
+
+    /**
+     * 获取对象的属性（带默认值）
+     * @param key 属性键
+     * @param val 属性值
+     * @param defval 默认值
+     * @returns 属性值
+     */
+    $attr(key: string, defval: any, { defval: any }): any;
     
     /**
      * 设置对象的属性（带存在性检查）
      * @param key 属性键
      * @param val 属性值
      * @param exists 是否检查属性是否存在
-     * @returns 设置后的值
+     * @returns 当前对象
      */
-    $attr(key: string, val: any, exists?: boolean): any;
-    
+    $attr(key: string, val: any, { exists: boolean }): this;
+
     /**
-     * 设置对象的属性（带定义选项）
+     * 设置对象的属性（带存在性检查）
      * @param key 属性键
      * @param val 属性值
-     * @param exists 是否检查属性是否存在
-     * @param define 定义选项
-     * @returns 设置后的值
+     * @param define 属性定义
+     * @returns 当前对象
      */
-    $attr(key: string, val: any, exists?: boolean, define?: boolean|Object): any;
-    
+    $attr(key: string, val: any, { define: any }): this;
+
     /**
-     * 设置对象的属性（带默认值）
+     * 属性四则运算（带定义选项）
      * @param key 属性键
      * @param val 属性值
-     * @param exists 是否检查属性是否存在
      * @param defval 默认值
-     * @returns 设置后的值
+     * @param add 加法值
+     * @param sub 减法值
+     * @param mul 乘法值
+     * @param div 除法值
+     * @returns 当前对象
      */
-    $attr(key: string, val: any, exists?: boolean, defval?: any): any;
+    $attr(key: string, val: any, { defval: any, add: number, sub: number, mul: number, div: number }): this;
     
     /**
      * 通过管道函数处理对象
@@ -175,7 +188,7 @@ declare global {
      * @param args 额外参数
      * @returns 管道函数的返回值
      */
-    $pipe(pipe: (v: Object, ...args: any[]) => any, ...args: any[]): any;
+    $pipe<T>(pipe: (value: this, ...args: any[]) => T, ...args: any[]): T;
     
     /**
      * 执行副作用函数并返回原对象
@@ -183,7 +196,7 @@ declare global {
      * @param args 额外参数
      * @returns 原对象
      */
-    $tee(tee: (v: Object, ...args: any[]) => any, ...args: any[]): any;
+    $tee(tee: (value: this, ...args: any[]) => void, ...args: any[]): this;
     
     /**
      * 将对象转换为数组
@@ -196,49 +209,49 @@ declare global {
      * @param args 调试信息
      * @returns 原对象
      */
-    $debug(...args: any[]): any;
+    $debug(...args: any[]): this;
     
     /**
      * 输出日志信息
      * @param args 日志信息
      * @returns 原对象
      */
-    $log(...args: any[]): any;
+    $log(...args: any[]): this;
     
     /**
      * 输出信息
      * @param args 信息
      * @returns 原对象
      */
-    $info(...args: any[]): any;
+    $info(...args: any[]): this;
     
     /**
      * 输出警告信息
      * @param args 警告信息
      * @returns 原对象
      */
-    $warn(...args: any[]): any;
+    $warn(...args: any[]): this;
     
     /**
      * 输出错误信息
      * @param args 错误信息
      * @returns 原对象
      */
-    $error(...args: any[]): any;
+    $error(...args: any[]): this;
     
     /**
      * 输出对象的详细信息
      * @param args 额外参数
      * @returns 原对象
      */
-    $dir(...args: any[]): any;
+    $dir(...args: any[]): this;
     
     /**
      * 触发调试器断点
      * @param args 额外参数
      * @returns 原对象
      */
-    $debugger(...args: any[]): any;
+    $debugger(...args: any[]): this;
     
     /**
      * 获取对象的父级链
@@ -267,7 +280,7 @@ declare global {
      * @returns 找到的节点
      */
     $tree$find(cb: (node: any) => boolean, self?: boolean, depth?: number, children?: string): any;
-    
+
     /**
      * 遍历树结构中的节点
      * @param cb 遍历回调函数
@@ -689,26 +702,26 @@ declare global {
      * 获取数组的键值对迭代器
      * @returns 键值对迭代器
      */
-    $entries(): IterableIterator<[number, T]>;
+    $entries(): [number, T][];
     
     /**
      * 获取数组的键迭代器
      * @returns 键迭代器
      */
-    $keys(): IterableIterator<number>;
+    $keys(): number[];
     
     /**
      * 获取数组的值迭代器
      * @returns 值迭代器
      */
-    $values(): IterableIterator<T>;
+    $values(): T[];
     
     /**
      * 映射数组元素
      * @param callback 映射函数
      * @returns 映射后的新数组
      */
-    $map<U>(callback: (v: any, i: number, array: T[]) => U): U[];
+    $map<U>(callback: (v: T, i: number, array: T[]) => U): U[];
     
     /**
      * 向数组末尾添加元素, 并返回当前数组
@@ -909,12 +922,12 @@ declare global {
      */
     decode(): string;
     
-    // assoc
-    // toTree
-    // $tree2tree
-    // $tree$find
-    // $tree$each
-    // $tree$map
+    assoc(id: keyof T & string, prop: keyof T & string, assoc?: Record<string, any> | ((ids: T[]) => Record<string, any>)): this;
+    toTree(o?: { id?: string; pid?: string; level?: string; root?: string; parent?: string; children?: string; empty?: any; hasRoot?: boolean }): any;
+    $tree2tree(o?: { id?: string; pid?: string; level?: string; root?: string; parent?: string; children?: string; empty?: any }, r?: any, p?: any): any;
+    $tree$find(cb: (value: any) => boolean, self?: boolean, depth?: number, children?: string): any | null;
+    $tree$each(cb: (value: any) => void, self?: boolean, depth?: number, children?: string): this;
+    $tree$map<U>(cb: (value: any) => U, self?: boolean, depth?: number, children?: string, empty?: any): U[];
   }
 
   /**
@@ -1638,4 +1651,4 @@ declare global {
   }
 }
 
-export {};
+export {}
