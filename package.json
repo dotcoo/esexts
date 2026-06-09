@@ -31,10 +31,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.16"
-  },
-  "dependencies": {
     "typescript": "^6.0.3",
+    "vite": "^8.0.16",
     "vite-plugin-dts": "^5.0.2"
   }
 }
