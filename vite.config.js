@@ -4,8 +4,10 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: 'lib/index.js',
+      entry: './lib/index.js',
       name: 'esexts',
+      formats: ['es', 'umd'],
+      fileName: (format) => format === 'es' ? 'esexts.js' : `esexts.${format}.js`,
     },
   },
 });

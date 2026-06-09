@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -20,11 +20,11 @@
   ],
   "type": "module",
   "types": "./types.d.ts",
-  "main": "./dist/esexts.umd.cjs",
+  "main": "./dist/esexts.umd.js",
   "module": "./dist/esexts.js",
   "exports": {
     "types": "./types.d.ts",
-    "require": "./dist/esexts.umd.cjs",
+    "require": "./dist/esexts.umd.js",
     "import": "./dist/esexts.js"
   },
   "scripts": {
@@ -33,6 +33,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.13"
+    "vite": "^8.0.16"
   }
 }
