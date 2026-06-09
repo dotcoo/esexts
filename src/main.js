@@ -2,7 +2,7 @@
 
 'use strict';
 
-typeof window === 'undefined' && require('../lib');
+typeof window === 'undefined' && require('../lib/esexts');
 
 import './Object';
 import './Number';

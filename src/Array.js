@@ -97,7 +97,7 @@ console.assert(JSON.stringify([{ id: 1, name: 'name1' }, { id: 2, name: 'name2' 
 
 // Array.prototype.toGroup
 
-console.assert(JSON.stringify([{ id: 1, name: 'name1', gender: 'man' }, { id: 2, name: 'name2', gender: 'woman' }, { id: 3, name: 'name3', gender: 'man' }].reduce((a, c) => (a.$attr(c.gender, [], false).$attr(c.gender).push(c), a), {})) === '{"man":[{"id":1,"name":"name1","gender":"man"},{"id":3,"name":"name3","gender":"man"}],"woman":[{"id":2,"name":"name2","gender":"woman"}]}', 'error');
+console.assert(JSON.stringify([{ id: 1, name: 'name1', gender: 'man' }, { id: 2, name: 'name2', gender: 'woman' }, { id: 3, name: 'name3', gender: 'man' }].reduce((a, c) => (a.$attr(c.gender, [], { exists: false }).$attr(c.gender).push(c), a), {})) === '{"man":[{"id":1,"name":"name1","gender":"man"},{"id":3,"name":"name3","gender":"man"}],"woman":[{"id":2,"name":"name2","gender":"woman"}]}', 'error');
 
 // Array.prototype.toMap
 
