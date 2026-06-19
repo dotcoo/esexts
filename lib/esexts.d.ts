@@ -41,16 +41,31 @@ declare global {
    */
   interface Object {
     /**
+     * 将值转换为 JSON 字符串
+     * @param v 要转换的值
+     * @param replacer 替换函数或数组
+     * @param space 缩进空格
+     * @returns JSON 字符串
+     */
+    $stringify(replacer?: any, space?: string | number): string;
+
+    /**
      * 克隆对象
      * @returns 克隆后的新对象
      */
-    $clone(): Record<string, any>;
+    $clone(): this;
     
     /**
      * 获取对象的长度（属性数量）
      * @returns 对象的属性数量
      */
     $length(): number;
+
+    /**
+     * 检查对象是否为空
+     * @returns 如果对象为空返回 true，否则返回 false
+     */
+    $empty(): boolean;
     
     /**
      * 获取对象的键值对迭代器
@@ -78,15 +93,6 @@ declare global {
     $assign(...sources: any[]): Record<string, any>;
     
     /**
-     * 将值转换为 JSON 字符串
-     * @param v 要转换的值
-     * @param replacer 替换函数或数组
-     * @param space 缩进空格
-     * @returns JSON 字符串
-     */
-    $stringify(replacer?: any, space?: string | number): string;
-    
-    /**
      * 合并多个对象到当前对象
      * @param args 要合并的对象列表
      * @returns 合并后的对象
@@ -99,12 +105,6 @@ declare global {
      * @returns 连接后的对象
      */
     $concat(...args: Record<string, any>[]): Record<string, any>;
-    
-    /**
-     * 检查对象是否为空
-     * @returns 如果对象为空返回 true，否则返回 false
-     */
-    $empty(): boolean;
     
     /**
      * 检查对象是否包含指定键
@@ -693,10 +693,31 @@ declare global {
    */
   interface Array<T> {
     /**
+     * 将值转换为 JSON 字符串
+     * @param v 要转换的值
+     * @param replacer 替换函数或数组
+     * @param space 缩进空格
+     * @returns JSON 字符串
+     */
+    $stringify(replacer?: any, space?: string | number): string;
+
+    /**
+     * 克隆数组
+     * @returns 克隆后的新数组
+     */
+    $clone(): this;
+
+    /**
      * 获取数组长度
      * @returns 数组长度
      */
     $length(): number;
+
+    /**
+     * 检查数组是否为空
+     * @returns 如果数组为空返回 true，否则返回 false
+     */
+    $empty(): boolean;
     
     /**
      * 获取数组的键值对迭代器
@@ -715,14 +736,7 @@ declare global {
      * @returns 值迭代器
      */
     $values(): T[];
-    
-    /**
-     * 映射数组元素
-     * @param callback 映射函数
-     * @returns 映射后的新数组
-     */
-    $map<U>(callback: (v: T, i: number, array: T[]) => U): U[];
-    
+
     /**
      * 向数组末尾添加元素, 并返回当前数组
      * @param items 要添加的元素
@@ -785,12 +799,6 @@ declare global {
      * @returns 第一个添加的元素
      */
     $unshift0(...items: T[]): T;
-    
-    /**
-     * 检查数组是否为空
-     * @returns 如果数组为空返回 true，否则返回 false
-     */
-    $empty(): boolean;
     
     /**
      * 获取数组的第一个元素
@@ -951,10 +959,31 @@ declare global {
    */
   interface Map<K, V> {
     /**
-     * 获取 Map 的大小
-     * @returns Map 的大小
+     * 将值转换为 JSON 字符串
+     * @param v 要转换的值
+     * @param replacer 替换函数或数组
+     * @param space 缩进空格
+     * @returns JSON 字符串
+     */
+    $stringify(replacer?: any, space?: string | number): string;
+
+    /**
+     * 克隆 Map
+     * @returns 克隆后的新 Map
+     */
+    $clone(): this;
+
+    /**
+     * 获取 Map 长度
+     * @returns Map 长度
      */
     $length(): number;
+
+    /**
+     * 检查 Map 是否为空
+     * @returns 如果 Map 为空返回 true，否则返回 false
+     */
+    $empty(): boolean;
     
     /**
      * 获取 Map 的键值对迭代器
@@ -1122,28 +1151,49 @@ declare global {
    */
   interface Set<T> {
     /**
-     * 获取 Set 的大小
-     * @returns Set 的大小
+     * 将值转换为 JSON 字符串
+     * @param v 要转换的值
+     * @param replacer 替换函数或数组
+     * @param space 缩进空格
+     * @returns JSON 字符串
+     */
+    $stringify(replacer?: any, space?: string | number): string;
+
+    /**
+     * 克隆 Set
+     * @returns 克隆后的新 Set
+     */
+    $clone(): this;
+
+    /**
+     * 获取 Set 长度
+     * @returns  Set 长度
      */
     $length(): number;
+
+    /**
+     * 检查 Set 是否为空
+     * @returns 如果 Set 为空返回 true，否则返回 false
+     */
+    $empty(): boolean;
     
     /**
      * 获取 Set 的键值对迭代器
      * @returns 键值对迭代器
      */
-    $entries(): IterableIterator<[T, T]>;
+    $entries(): [number, T][];
     
     /**
      * 获取 Set 的键迭代器
      * @returns 键迭代器
      */
-    $keys(): IterableIterator<T>;
+    $keys(): number[];
     
     /**
      * 获取 Set 的值迭代器
      * @returns 值迭代器
      */
-    $values(): IterableIterator<T>;
+    $values(): T[];
     
     /**
      * 添加元素, 并返回当前Map
