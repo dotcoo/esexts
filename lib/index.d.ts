@@ -1670,7 +1670,7 @@ declare global {
      * @param callback 异步计算函数
      * @returns Promise，解析为值
      */
-    getOrInsertComputedAsync(key: K, callback: (key: K) => Promise<V>): Promise<V>;
+    getOrInsertComputedAsync(key: K, callback: (key: K) => Promise<V | undefined | null>): Promise<V | undefined | null>;
     
     /**
      * 设置键值对

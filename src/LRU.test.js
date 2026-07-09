@@ -2,6 +2,8 @@
 
 'use strict';
 
+import { LRU } from '../lib/LRU.js'
+
 // ====== LRU ======
 
 const lru1 = LRU.new(3);

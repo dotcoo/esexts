@@ -244,13 +244,13 @@ t1.$tree$map(({ id, name, level }) => ({ id, name, level }), false, 2).$tree$eac
 
 // === Tree Array ===
 
-console.log('Array.treeFind0', list1.$clone().toTree().children.$tree$find(v => v.id == 5));
-console.log('Array.treeEach0', list1.$clone().toTree().children.$tree$each(v => v.name += '-each'));
-console.log('Array.treeMap0', list1.$clone().toTree().children.$tree$map(({ id, name, level }) => ({ id, name: name + '-map', level })));
+console.log('Array.$tree$find', list1.$clone().toTree().children.$tree$find(v => v.id == 5));
+console.log('Array.$tree$each', list1.$clone().toTree().children.$tree$each(v => v.name += '-each'));
+console.log('Array.$tree$map', list1.$clone().toTree().children.$tree$map(({ id, name, level }) => ({ id, name: name + '-map', level })));
 
 // === Tree Methods ===
 
 const t2 = list1.$clone().toTree();
 
-console.log('Object.getChildrens0', t2.$getChildrens(true));
-console.log('Object.getChildrens0', t2.$getChildrens(true, 1));
+console.log('Object.$getChildrens', t2.$getChildrens(true));
+console.log('Object.$getChildrens', t2.$getChildrens(true, 1));
