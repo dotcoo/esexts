@@ -12,7 +12,7 @@ declare global {
     /**
      * 创建一个新的 Object 实例
      */
-    new(): Record<string, any>;
+    'new'(): Record<string, any>;
     
     /**
      * 检查一个值是否为对象
@@ -112,6 +112,13 @@ declare global {
      * @returns 如果包含指定键返回 true，否则返回 false
      */
     $has(key: string): boolean;
+
+    /**
+     * 从对象中选取指定键的属性
+     * @param keys 要选取的键列表
+     * @returns 包含指定键属性的数组
+     */
+    $vals(...keys: string[]): any[];
     
     /**
      * 从对象中选取指定键的属性
@@ -466,7 +473,7 @@ declare global {
     /**
      * 创建一个新的 String 实例
      */
-    new(): string;
+    'new'(): string;
   }
 
   /**
@@ -478,6 +485,12 @@ declare global {
      * @returns 字符串长度
      */
     $length(): number;
+
+    /**
+     * 获取字符串长度
+     * @returns 字符串长度
+     */
+    $parse(defval?: any): any;
     
     /**
      * 截取子字符串
@@ -590,9 +603,15 @@ declare global {
     /**
      * 固定小数位数
      * @param decimal 小数位数
-     * @returns 固定小数位数后的字符串
+     * @returns 固定小数位数后的数字
      */
-    fixed(decimal?: number): string;
+    fixed(decimal?: number): number;
+
+    /**
+     * 转换为数字
+     * @returns 数字
+     */
+    toNumber(): number;
     
     /**
      * 转换为日期对象
@@ -638,24 +657,24 @@ declare global {
     /**
      * 创建一个新的数组实例
      */
-    new(): any[];
+    'new'(): any[];
     
     /**
      * 创建一个新的泛型数组实例
      */
-    new<T>(): T[];
+    'new'<T>(): T[];
     
     /**
      * 通过元素创建一个新的数组实例
      * @param items 数组元素
      */
-    new<T>(...items: T[]): T[];
+    'new'<T>(...items: T[]): T[];
     
     /**
      * 通过长度创建一个新的数组实例
      * @param length 数组长度
      */
-    new<T>(length: number): T[];
+    'new'<T>(length: number): T[];
     
     /**
      * 创建一个范围数组
@@ -718,6 +737,12 @@ declare global {
      * @returns 如果数组为空返回 true，否则返回 false
      */
     $empty(): boolean;
+
+    /**
+     * 将键值数组转换为对象
+     * @returns 对象
+     */
+    fromEntries(): Record<string, any>;
     
     /**
      * 获取数组的键值对迭代器
@@ -891,20 +916,28 @@ declare global {
      * @returns 对称差集数组
      */
     symmetricDifference(a: T[]): T[];
+
+    /**
+     * 转换为 Object
+     * @param key 键值
+     * @param val 值
+     * @returns 转换后的 Object
+     */
+    toObject<K extends any, V extends any>(cb?: (value: T, index: number) => [K, V]): Record<K, V>;
     
     /**
      * 转换为 Map
      * @param cb 转换函数
      * @returns 转换后的 Map
      */
-    toMap(cb?: (value: T, index: number) => [any, any]): Map<any, any>;
+    toMap<K extends any, V extends any>(cb?: (value: T, index: number) => [K, V]): Map<K, V>;
     
     /**
      * 转换为 Set
      * @param cb 转换函数
      * @returns 转换后的 Set
      */
-    toSet(cb?: (value: T) => any): Set<any>;
+    toSet<V extends any>(cb?: (value: T, index: number) => V): Set<V>;
     
     /**
      * 转换为 Uint8Array
@@ -930,7 +963,7 @@ declare global {
      */
     decode(): string;
     
-    assoc(id: keyof T & string, prop: keyof T & string, assoc?: Record<string, any> | ((ids: T[]) => Record<string, any>)): this;
+    assoc<J>(o: { props: keyof T | (keyof T)[], rows: J[], cols: keyof J | (keyof J)[], prefix?: boolean | string, injects?: (keyof J)[] | Partial<Record<keyof J, string>> }): this;
     toTree(o?: { id?: string; pid?: string; level?: string; root?: string; parent?: string; children?: string; empty?: any; hasRoot?: boolean }): any;
     $tree2tree(o?: { id?: string; pid?: string; level?: string; root?: string; parent?: string; children?: string; empty?: any }, r?: any, p?: any): any;
     $tree$find(cb: (value: any) => boolean, self?: boolean, depth?: number, children?: string): any | null;
@@ -945,13 +978,13 @@ declare global {
     /**
      * 创建一个新的 Map 实例
      */
-    new<K, V>(): Map<K, V>;
+    'new'<K, V>(): Map<K, V>;
     
     /**
      * 通过迭代器创建一个新的 Map 实例
      * @param iterator 迭代器
      */
-    new<K, V>(iterator: Iterator<K, V, V>): Map<K, V>;
+    'new'<K, V>(iterator: Iterator<K, V, V>): Map<K, V>;
   }
 
   /**
@@ -989,19 +1022,19 @@ declare global {
      * 获取 Map 的键值对迭代器
      * @returns 键值对迭代器
      */
-    $entries(): IterableIterator<[K, V]>;
+    $entries(): Array<[K, V]>;
     
     /**
      * 获取 Map 的键迭代器
      * @returns 键迭代器
      */
-    $keys(): IterableIterator<K>;
+    $keys(): Array<K>;
     
     /**
      * 获取 Map 的值迭代器
      * @returns 值迭代器
      */
-    $values(): IterableIterator<V>;
+    $values(): Array<V>;
     
     /**
      * 设置键值对, 并返回当前Map
@@ -1137,13 +1170,13 @@ declare global {
     /**
      * 创建一个新的 Set 实例
      */
-    new<T>(): Set<T>;
+    'new'<T>(): Set<T>;
     
     /**
      * 通过迭代器创建一个新的 Set 实例
      * @param iterator 迭代器
      */
-    new<T>(iterator: Iterator<T, T, T>): Set<T>;
+    'new'<T>(iterator: Iterator<T, T, T>): Set<T>;
   }
 
   /**
@@ -1286,7 +1319,7 @@ declare global {
      * 创建一个新的 Date 实例
      * @param args 构造参数
      */
-    new(...args: any[]): Date;
+    'new'(...args: any[]): Date;
     
     /**
      * 格式化当前日期
@@ -1486,13 +1519,13 @@ declare global {
     /**
      * 创建一个新的 Uint8Array 实例
      */
-    new(): Uint8Array;
+    'new'(): Uint8Array;
     
     /**
      * 通过长度创建一个新的 Uint8Array 实例
      * @param length 长度
      */
-    new(length: number): Uint8Array;
+    'new'(length: number): Uint8Array;
     
     /**
      * 从字符串创建 Uint8Array
@@ -1622,7 +1655,22 @@ declare global {
      * @returns Promise
      */
     sleep(duration: number): Promise<void>;
-    
+
+    /*
+     * 防抖 debounce 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+     * @param fn 函数
+     * @param delay 延迟时间（毫秒）
+     */
+    debounce<T extends (...args: any[]) => any>(fn: T, delay: number = 500): T & { cancel: () => void };
+
+    /*
+     * 节流 throttle 每隔一段时间，只执行一次函数。
+     * @param fn 函数
+     * @param number 间隔时间（毫秒）
+     * @returns Function
+     */
+    throttle<T extends (...args: any[]) => void>(fn: T, interval: number = 500): T;
+
     /**
      * 使用模板
      * @param name 模板名称
@@ -1639,7 +1687,11 @@ declare global {
      * 构造函数
      * @param capacity 容量
      */
-    constructor(capacity: number);
+    constructor();
+    constructor(iterable: [any, any][]);
+    constructor(iterable: [any, any][], capacity: number);
+    constructor(iterable: [any, any][], capacity: number, callback: (key: K) => V);
+    constructor(iterable: [any, any][], capacity: number, callback: (key: K) => Promise<V | undefined | null>);
     
     /**
      * 获取值
@@ -1662,6 +1714,7 @@ declare global {
      * @param callback 计算函数
      * @returns 值
      */
+    getOrInsertComputed(key: K): V;
     getOrInsertComputed(key: K, callback: (key: K) => V): V;
     
     /**
@@ -1670,6 +1723,7 @@ declare global {
      * @param callback 异步计算函数
      * @returns Promise，解析为值
      */
+    getOrInsertComputedAsync(key: K): Promise<V | undefined | null>;
     getOrInsertComputedAsync(key: K, callback: (key: K) => Promise<V | undefined | null>): Promise<V | undefined | null>;
     
     /**
@@ -1697,8 +1751,17 @@ declare global {
      * 创建一个新的 LRU 实例
      * @param capacity 容量
      */
-    new <K, V>(capacity: number): LRU<K, V>;
+    'new'<K, V>(capacity: number): LRU<K, V>;
   }
+
+  type Tree<T> = T & {
+    // id: number,
+    // pid: number,
+    level: number,
+    root: Tree<T>,
+    parent: Tree<T>,
+    children: Tree<T>[];
+  };
 }
 
 export {}

@@ -1,6 +1,6 @@
 {
   "name": "esexts",
-  "version": "2.2.7",
+  "version": "2.3.0",
   "description": "esexts",
   "author": "dotcoo <dotcoo@163.com> (http://blog.dotcoo.com)",
   "homepage": "https://github.com/dotcoo/esexts#readme",
@@ -25,7 +25,12 @@
       "import": "./dist/esexts.js"
     },
     "./polyfill": {
-      "import": "./dist/esexts.js"
+      "types": "./dist/esexts.d.ts",
+      "import": "./dist/polyfill.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js"
     }
   },
   "scripts": {
@@ -34,8 +39,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "^6.0.3",
-    "vite": "^8.1.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0",
     "vite-plugin-dts": "^5.0.3",
     "vite-plugin-static-copy": "^4.1.1"
   }
